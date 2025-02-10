@@ -3,6 +3,8 @@
 
 #include "Obstacle.h"
 #include "SnakeBase.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 // Sets default values
 AObstacle::AObstacle()
@@ -33,6 +35,7 @@ void AObstacle::Interact(AActor* Interactor, bool bIsHead)
 		if (IsValid(Snake)) {
 			Snake->DeleteSnakeElements();
 			Snake->Destroy();
+			UKismetSystemLibrary::QuitGame(GetWorld(), UGameplayStatics::GetPlayerController(GetWorld(), 0), EQuitPreference::Quit, false);
 		}
 	}
 }
